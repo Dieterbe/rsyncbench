@@ -20,3 +20,10 @@ note: rsyncbench does not violate SI prefixes.
 
 Note that ls and dd are in powers of 2 by default even when
 they imply they aren't (i.e. they violate SI prefixes)
+
+== hacking ==
+each test 'plugin' should have a corresponding graph.gp file
+you should override test_run, and you can override test_init (if the pool dir
+must be popupated with specific data you need)
+$src and $dst are not necessarily clean when you're invoked, the idea being
+you might use what's already there. but probably you'll have to delete the data first
