@@ -19,13 +19,15 @@ echo "creating empty file, if needed"
 	[ -f $pool/data-empty ] || touch $pool/data-empty
 
 function measure_rsync () {
-        tcpdump_cmd
-        time_before=$(date +%s)
-        bytes_sent_comp=$(rsync -av $src/ $dst/ | awk '/^sent [^ ]* bytes/ { print $2}')
-        time_after=$(date +%s)
-        tcpdump_stop
-        bytes_sent=$(stat -c %s /tmp/rsyncpackets)
-        duration=$((time_after - time_before))
+	tcpdump_cmd
+	time_before=$(date +%s)
+	bytes_sent_comp=$(rsync -av $src/ $dst/ | awk '/^sent [^ ]* bytes/ { print $2}')
+	kiB_sent_comp=$((bytes_sent_comp / 1024))
+	time_after=$(date +%s)
+	tcpdump_stop
+	bytes_sent=$(stat -c %s /tmp/rsyncpackets)
+	kiB_sent=$((bytes_sent / 1024))
+	duration=$((time_after - time_before))
 }
 
 # override these in plugins
