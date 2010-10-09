@@ -1,0 +1,19 @@
+== Dependencies ==
+a posix shell
+rsync
+tcpdump
+gnuplot
+
+== instructions ==
+mkdir -p  ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench && \
+cp config ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench && \
+$EDITOR   ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/config
+
+read the comments in the config
+
+== running the benchmark ==
+rsyncbench
+
+note: rsyncbench does not violate SI prefixes.
+ * M  means 10^6
+ * Mi means 2^20
