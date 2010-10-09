@@ -22,6 +22,8 @@ Note that ls and dd are in powers of 2 by default even when
 they imply they aren't (i.e. they violate SI prefixes)
 
 == hacking ==
+plugins won't be executed, only sourced.  they have access to everything in your config
+plugins should end on .sh
 each test 'plugin' should have a corresponding graph.gp file
 you should override test_run, and you can override test_init (if the pool dir
 must be popupated with specific data you need)

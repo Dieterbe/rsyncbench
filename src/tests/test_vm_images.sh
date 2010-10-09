@@ -6,3 +6,6 @@ set -e
 function test_init () {
 	source $test_vm_images_fetch
 }
+function test_run () {
+	rm -rf $src/*
+}

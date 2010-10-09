@@ -38,7 +38,8 @@ function test_run () {
 	true
 }
 
-for testrun in src/tests/*
+cd src/tests
+for testrun in *.sh
 do
 	# i don't really see a reason this should be per-testrun, seems to make more sense to do this globally
 	# so that different tests have access to each other files
@@ -47,12 +48,10 @@ do
 	test_init
 done
 
-exit
-
-
-for testrun in tests/*
+for testrun in *.sh
 do
 	echo "RUNNING TESTRUN $testrun"
 	source $testrun
 	test_run
+	${testrun}_graph.gp > /tmp/`basename $testrun .sh`_graph.png
 done
