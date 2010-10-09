@@ -17,3 +17,6 @@ rsyncbench
 note: rsyncbench does not violate SI prefixes.
  * M  means 10^6
  * Mi means 2^20
+
+Note that ls and dd are in powers of 2 by default even when
+they imply they aren't (i.e. they violate SI prefixes)

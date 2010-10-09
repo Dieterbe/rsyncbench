@@ -1,0 +1,56 @@
+#!/bin/sh
+
+set -e
+
+source ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/config
+$init_pool
+$init_src
+$init_dst
+echo "Initialising data useful for all tests"
+for size in 1 100 1024
+do
+	echo "creating random file, $size MiB big, if needed"
+	[ -f $pool/data-random-$size ] || dd if=/dev/urandom of=$pool/data-random-$size bs=1024k count=$size # hard to compress
+	echo "creating file full of zeroes, $size MiB big, if needed"
+	[ -f $pool/data-zeroes-$size ] || dd if=/dev/zero    of=$pool/data-zeroes-$size bs=1024k count=$size # easy to compress
+done
+
+echo "creating empty file, if needed"
+	[ -f $pool/data-empty ] || touch $pool/data-empty
+
+function measure_rsync () {
+        tcpdump_cmd
+        time_before=$(date +%s)
+        bytes_sent_comp=$(rsync -av $src/ $dst/ | awk '/^sent [^ ]* bytes/ { print $2}')
+        time_after=$(date +%s)
+        tcpdump_stop
+        bytes_sent=$(stat -c %s /tmp/rsyncpackets)
+        duration=$((time_after - time_before))
+}
+
+# override these in plugins
+function test_init () {
+	true
+}
+function test_run () {
+	true
+}
+
+for testrun in src/tests/*
+do
+	# i don't really see a reason this should be per-testrun, seems to make more sense to do this globally
+	# so that different tests have access to each other files
+	echo "Initialising data specifically for $testrun"
+	source $testrun
+	test_init
+done
+
+exit
+
+
+for testrun in tests/*
+do
+	echo "RUNNING TESTRUN $testrun"
+	source $testrun
+	test_run
+done
