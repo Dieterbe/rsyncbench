@@ -14,14 +14,14 @@ do
 		echo "** Testing sync from scratch.."
 		cp $pool/data-$type-$size $src
 		measure_rsync
-		line="$line $duration $kiB_sent $kiB_sent_comp"
+		line="$line $duration $sent $sent_comp"
 		echo "** Testing 'no-op' sync.."
 		measure_rsync
-		line="$line $duration $kiB_sent $kiB_sent_comp"
+		line="$line $duration $sent $sent_comp"
 		echo "** Testing sync with appended $type data block"
 		cat $pool/data-$type-1 >> $src/data-$type-$size
 		measure_rsync
-		line="$line $duration $kiB_sent $kiB_sent_comp"
+		line="$line $duration $sent $sent_comp"
 		echo "** Testing sync with prepended $type data block" # could be more efficient..
 		rsync $pool/data-$type-$size $src/data-$type-$size
 		rsync -a $src/ $dst/
@@ -30,7 +30,7 @@ do
 		cat $src/data-$type-$size.tmp >> $src/data-$type-$size
 		rm $src/data-$type-$size.tmp
 		measure_rsync
-		line="$line $duration $kiB_sent $kiB_sent_comp"
+		line="$line $duration $sent $sent_comp"
 		# maybe later:
 		# append/prepend zero blocks
 		# replace data block in the middle

@@ -6,10 +6,10 @@ title=system("echo $TITLE")
 set terminal png
 
 set xlabel "File size (MiB)"
+set ytics ("1 kiB" 1024, "1 MiB" 1048576, "10 MiB" 10485760, "100 MiB" 104857600, "1 GiB" 1073741824)
+set ylabel "Bytes sent"
 
-set ylabel "kiB sent"
-
-set title title." images, kiB transferred"
+set title title." images, bytes transferred"
 set grid
 
 set logscale y
