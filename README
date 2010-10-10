@@ -3,6 +3,7 @@ a posix shell
 rsync
 tcpdump
 gnuplot
+find
 
 == instructions ==
 mkdir -p  ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench && \
