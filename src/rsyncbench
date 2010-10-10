@@ -38,22 +38,13 @@ function measure_rsync () {
 	duration=$((time_after - time_before))
 }
 
-# override these in plugins
-function test_init () {
-	true
-}
-function test_run () {
-	true
-}
-function test_graph () {
-	true
-}
 cd src/tests
 for testrun in *.sh
 do
 	# i don't really see a reason this should be per-testrun, seems to make more sense to do this globally
 	# so that different tests have access to each other files
 	echo "Initialising data specifically for $testrun"
+	. ./skeleton.sh
 	. ./$testrun
 	test_init
 done
@@ -61,6 +52,7 @@ done
 for testrun in *.sh
 do
 	echo "RUNNING TESTRUN $testrun"
+	. ./skeleton.sh
 	. ./$testrun
 	test_run
 	test_graph
