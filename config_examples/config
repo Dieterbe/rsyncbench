@@ -22,4 +22,8 @@ tcpdump_cmd="sudo tcpdump -q -w /tmp/rsyncpackets -i lo port 22 and src localhos
 tcpdump_stop='sudo pkill -f "sudo tcpdump -q -w /tmp/rsyncpackets -i lo port 22 and src localhost and dst localhost"'
 
 # extra configuration for specific plugins goes here
+
+# the test_vm_images plugin will call this script during initialisation to populate $pool with virtual machine image.
+# which images, and where they come from, is your call. as long as they have 'vdi' somewhere in the name.
+# their mtime will be used to identify them
 test_vm_images_fetch="${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/vm_images_fetch.sh"
