@@ -27,12 +27,12 @@ echo "creating empty file, if needed"
 	[ -f $pool/data-empty ] || touch $pool/data-empty
 
 function measure_rsync () {
-	tcpdump_cmd
+	$tcpdump_cmd &
 	time_before=$(date +%s)
 	bytes_sent_comp=$(rsync -av $src/ $dst/ | awk '/^sent [^ ]* bytes/ { print $2}')
 	kiB_sent_comp=$((bytes_sent_comp / 1024))
 	time_after=$(date +%s)
-	tcpdump_stop
+	eval $tcpdump_stop || true # for some reason, this returns false even when it worked.. so we assume it always works.
 	bytes_sent=$(stat -c %s /tmp/rsyncpackets)
 	kiB_sent=$((bytes_sent / 1024))
 	duration=$((time_after - time_before))
