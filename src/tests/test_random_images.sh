@@ -4,22 +4,23 @@ function test_run () {
 	> /tmp/rsyncbench_results_test_random_images.txt
 	for size in 1 100 1024
 	do
+		echo "Preparing test.."
 		line="$size "
 		rm -rf $src/*
-		rsync -a $src/ $dst/
+		rsync -a --delete $src/ $dst/
+		echo "Testing sync from scratch.."
 		cp $pool/data-random-$size $src
-		# from scratch
 		measure_rsync
 		line="$line $duration $kiB_sent $kiB_sent_comp"
-		# no-op
+		echo "Testing 'no-op' sync.."
 		measure_rsync
 		line="$line $duration $kiB_sent $kiB_sent_comp"
-		# append random data block
+		echo "Testing sync with appended random data block"
 		cat $pool/data-random-1 >> $src/data-random-$size
 		measure_rsync
 		line="$line $duration $kiB_sent $kiB_sent_comp"
-		# prepend random data block (this can be more efficient)
-		cp $pool/data-random-$size $src
+		echo "Testing sync with prepended random data block" # could be more efficient..
+		rsync $pool/data-random-$size $src/data-random-$size
 		rsync -a $src/ $dst/
 		mv $src/data-random-$size $src/data-random-$size.tmp
 		cp $pool/data-random-1 $src/data-random-$size
