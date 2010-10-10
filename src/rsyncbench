@@ -2,7 +2,7 @@
 
 set -e
 
-source ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/config
+. ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/config
 $init_pool
 $init_src
 $init_dst
@@ -44,14 +44,14 @@ do
 	# i don't really see a reason this should be per-testrun, seems to make more sense to do this globally
 	# so that different tests have access to each other files
 	echo "Initialising data specifically for $testrun"
-	source $testrun
+	. ./$testrun
 	test_init
 done
 
 for testrun in *.sh
 do
 	echo "RUNNING TESTRUN $testrun"
-	source $testrun
+	. ./$testrun
 	test_run
 	${testrun}_graph.gp > /tmp/`basename $testrun .sh`_graph.png
 done
