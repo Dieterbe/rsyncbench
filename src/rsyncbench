@@ -45,7 +45,9 @@ function test_init () {
 function test_run () {
 	true
 }
-
+function test_graph () {
+	true
+}
 cd src/tests
 for testrun in *.sh
 do
@@ -61,5 +63,5 @@ do
 	echo "RUNNING TESTRUN $testrun"
 	. ./$testrun
 	test_run
-	${testrun}_graph.gp > /tmp/`basename $testrun .sh`_graph.png
+	test_graph
 done

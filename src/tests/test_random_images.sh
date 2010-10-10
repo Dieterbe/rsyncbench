@@ -35,3 +35,8 @@ function test_run () {
 		echo "$line">> /tmp/rsyncbench_results_test_random_images.txt
 	done
 }
+
+function test_graph () {
+	 ./test_random_images_durations.gp > /tmp/random_images_durations.png
+	 ./test_random_images_sent.gp      > /tmp/random_images_sent.png
+}
