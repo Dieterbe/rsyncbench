@@ -3,6 +3,14 @@
 set -e
 
 . ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/config
+for var in src dst pool init_pool init_src init_dst tcpdump_cmd tcpdump_stop
+do
+	if [[ -z ${!var} ]]
+	then
+		echo "variable $var is not set!" >&2
+		exit 2
+	fi
+done
 $init_pool
 $init_src
 $init_dst
