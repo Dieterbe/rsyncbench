@@ -17,9 +17,9 @@ init_dst="mkdir -p $(echo $dst | cut -d : -f2)"
 # not the most secure, but hey..
 # %wheel ALL=(ALL) NOPASSWD: /usr/sbin/tcpdump
 # %wheel ALL=(ALL) NOPASSWD: /usr/bin/pkill
-tcpdump_cmd="sudo tcpdump -q -w /tmp/rsyncpackets -i lo port 22 and src localhost and dst localhost"
+tcpdump_cmd="sudo tcpdump -q -w - -i lo port 22 and src localhost and dst localhost"
 # how to stop the tcpdump
-tcpdump_stop='sudo pkill -f "sudo tcpdump -q -w /tmp/rsyncpackets -i lo port 22 and src localhost and dst localhost"'
+tcpdump_stop='sudo pkill -f "sudo tcpdump -q -w - -i lo port 22 and src localhost and dst localhost"'
 
 # extra configuration for specific plugins goes here
 

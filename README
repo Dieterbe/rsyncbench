@@ -11,8 +11,6 @@ $EDITOR   ${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/config
 
 read the comments in the config
 make sure that $src,$dst,$pool have enough space to hold all the data.
-Also, the test_vm_images plugin can cause a lot of traffic, make sure your /tmp has enough space
-to hold all the dumped packets (~size of first image)
 
 == running the benchmark ==
 rsyncbench
