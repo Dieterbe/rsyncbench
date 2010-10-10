@@ -38,6 +38,6 @@ function test_run () {
 }
 
 function test_graph () {
-	 ./test_random_images_durations.gp > /tmp/random_images_durations.png
-	 ./test_random_images_sent.gp      > /tmp/random_images_sent.png
+	 ./test_random_images_durations.gp > /tmp/rsyncbench_random_images_durations.png
+	 ./test_random_images_sent.gp      > /tmp/rsyncbench_random_images_sent.png
 }
