@@ -41,6 +41,7 @@ function measure_rsync () {
 cd src/tests
 for testrun in *.sh
 do
+	[ $testrun = skeleton.sh ] && continue
 	# i don't really see a reason this should be per-testrun, seems to make more sense to do this globally
 	# so that different tests have access to each other files
 	echo "Initialising data specifically for $testrun"
@@ -51,6 +52,7 @@ done
 
 for testrun in *.sh
 do
+	[ $testrun = skeleton.sh ] && continue
 	echo "RUNNING TESTRUN $testrun"
 	. ./skeleton.sh
 	. ./$testrun
