@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function test_run () {
-	> /tmp/rsyncbench_results_test_random_images.txt
+	echo "#size scratch_d scratch_s scratch_sc noop_d noop_s noop_sc append_1_d append_1_s append_1_sc prepend_1_d prepend_1_s prepend_1_sc" > /tmp/rsyncbench_results_test_random_images.txt
 	for size in 1 100 1024
 	do
 		echo "Preparing test.."
@@ -29,10 +29,10 @@ function test_run () {
 		measure_rsync
 		line="$line $duration $kiB_sent $kiB_sent_comp"
 		# maybe later:
+		# append/prepend zero blocks
 		# replace data block in the middle
 		# shuffle blocks in the file around
 		# replace blocks in begin, middle, end
-		echo "#size scratch_d scratch_s scratch_sc noop_d noop_s noop_sc append_1_d append_1_s append_1_sc prepend_1_d prepend_1_s prepend_1_sc" >> /tmp/rsyncbench_results_test_random_images.txt
 		echo "$line">> /tmp/rsyncbench_results_test_random_images.txt
 	done
 }
