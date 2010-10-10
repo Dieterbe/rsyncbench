@@ -1,15 +1,16 @@
 # which locations to use for src and dst.
 # you're free to specify whichever host you want, as long as you can sniff the right traffic
-rsync_src=/tmp/rsyncbench/src
-rsync_dst=localhost:/tmp/rsyncbench/dst
+# you probably should use absolute paths, unless you know what you're doing
+src=/tmp/rsyncbench/src
+dst=localhost:/tmp/rsyncbench/dst
 
 # where to store temporary files, have this on the same host as src
 pool=/tmp/rsyncbench/pool
 
 # how to initialise src and dst
 init_pool="mkdir -p $pool"
-init_src="mkdir -p $rsync_src"
-init_dst="mkdir -p $(echo $rsync_dst | cut -d : -f2)"
+init_src="mkdir -p $src"
+init_dst="mkdir -p $(echo $dst | cut -d : -f2)"
 
 # the tcpdumpcommand that should match *only* your rsyncbench traffic, nothing more, nothing less
 # you probably want something like these in /etc/sudoers, at least for the duration of the benchmark:
@@ -22,4 +23,3 @@ tcpdump_stop='sudo pkill -f "sudo tcpdump -q -w /tmp/rsyncpackets -i lo port 22 
 
 # extra configuration for specific plugins goes here
 test_vm_images_fetch="${XDG_CONFIG_HOME:-$HOME/.config}/rsyncbench/vm_images_fetch.sh"
-
