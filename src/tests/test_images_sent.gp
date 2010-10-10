@@ -1,18 +1,21 @@
 #!/usr/bin/env gnuplot
 reset
+type=system("echo $TYPE")
+title=system("echo $TITLE")
+
 set terminal png
 
 set xlabel "File size (MiB)"
 
 set ylabel "kiB sent"
 
-set title "Random images, kiB transferred"
+set title title." images, kiB transferred"
 set grid
 
 set logscale y
 set style data linespoints
 
-plot "/tmp/rsyncbench_results_test_random_images.txt" \
+plot "/tmp/rsyncbench_results_test_".type."_images.txt" \
 using 1:3 title "Sending from scratch", \
 "" using 1:4 title "Sending from scratch compressed", \
 "" using 1:6 title "No-op", \
