@@ -31,3 +31,6 @@ you should override test_run and test_graph, and you can override test_init (if 
 must be popupated with specific data you need)
 $src and $dst are not necessarily clean when you're invoked, the idea being
 you might use what's already there. but probably you'll have to delete the data first
+
+== "I want to get other/new graphs but don't want to regenerate the data" ==
+just source the plugin and type 'test_graph'
