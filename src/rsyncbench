@@ -26,14 +26,40 @@ done
 echo "creating empty file, if needed"
 	[ -f $pool/data-empty ] || touch $pool/data-empty
 
+# $1 must be non-empty and only have 0-9 characters
+function is_numeric () {
+	[ -z "$1" ] && return 1
+	[[ $1 = *[^0-9]* ]] && return 1
+	return 0
+}
+
 function measure_rsync () {
+	duration=
+	sent=
+	sent_comp=
+	wrong_params=
+	rm -f /tmp/rsyncbench.tcpdumpcount
 	($tcpdump_cmd | wc -c > /tmp/rsyncbench.tcpdumpcount ) &
 	time_before=$(date +%s)
 	sent_comp=$(rsync -av --delete $src/ $dst/ | awk '/^sent [^ ]* bytes/ { print $2}')
 	time_after=$(date +%s)
 	eval $tcpdump_stop || true # for some reason, this returns false even when it worked.. so we assume it always works.
+	while [ ! -s /tmp/rsyncbench.tcpdumpcount ]
+	do
+		echo "waiting for /tmp/rsyncbench.tcpdumpcount to receive the data..."
+		sleep 0.5
+	done
 	sent=$(cat /tmp/rsyncbench.tcpdumpcount)
 	duration=$((time_after - time_before))
+	for var in duration sent sent_comp
+	do
+		is_numeric ${!var} || wrong_params="$wrong_params ${!var}"
+	done
+	if [ -n "$wrong_params" ]
+	then
+		echo "The following parameters are incorrect: $wrong_params (all values: duration: $duration, sent: $sent, sent_comp: $sent_comp)" >&2
+		exit 2
+	fi
 }
 
 cd src/tests
