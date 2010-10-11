@@ -36,7 +36,7 @@ do
 		# replace data block in the middle
 		# shuffle blocks in the file around
 		# replace blocks in begin, middle, end
-		"** Writing results.."
+		echo "** Writing results.."
 		echo "$line">> /tmp/rsyncbench_results_test_${type}_images.txt
 	done
 done
