@@ -45,10 +45,10 @@ done
 function test_graph () {
 	export TYPE=random TITLE=Random
 	type=random
-	./test_images_durations.gp > /tmp/rsyncbench_${type}_images_durations.png
-	./test_images_sent.gp      > /tmp/rsyncbench_${type}_images_sent.png
+	./test_images_durations.gp > rsyncbench_${type}_images_durations.png
+	./test_images_sent.gp      > rsyncbench_${type}_images_sent.png
 	export TYPE=zeroes TITLE=Zeroes
 	type=zeroes
-	./test_images_durations.gp > /tmp/rsyncbench_${type}_images_durations.png
-	./test_images_sent.gp      > /tmp/rsyncbench_${type}_images_sent.png
+	./test_images_durations.gp > rsyncbench_${type}_images_durations.png
+	./test_images_sent.gp      > rsyncbench_${type}_images_sent.png
 }
