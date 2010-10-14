@@ -3,8 +3,8 @@ reset
 set terminal png
 
 set xdata time
-set timefmt "%d/%m/%Y %H:%M:%S"
-set format x "%d/%m/%Y %H:%M:%S"
+set timefmt "%Y-%m-%d %H:%M:%S"
+set format x "%d/%m"
 set xlabel "Image with Last modification time"
 
 set ylabel "Duration in seconds"
