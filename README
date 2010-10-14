@@ -34,3 +34,8 @@ you might use what's already there. but probably you'll have to delete the data 
 
 == "I want to get other/new graphs but don't want to regenerate the data" ==
 just source the plugin and type 'test_graph'
+
+
+== TODO ==
+* have users put $src and $pool on same FS, then most of $pool->$src can be cp -al, causing a significant speedup
+* Makefile, sensible locations for files and scripts
