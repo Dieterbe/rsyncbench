@@ -14,7 +14,7 @@ read the comments in the config
 make sure that $src,$dst,$pool have enough space to hold all the data.
 
 == running the benchmark ==
-$ rsyncbench
+$ cd $checkout && ./src/rsyncbench # sorry, not fhs-compliant yet
 
 note: rsyncbench does not violate SI prefixes.
  * M  means 10^6
@@ -43,4 +43,4 @@ just source the plugin and type 'test_graph'
 
 == TODO ==
 * have users put $src and $pool on same FS, then most of $pool->$src can be cp -al, causing a significant speedup
-* Makefile, sensible locations for files and scripts
+* Makefile & FHS-compliancy
