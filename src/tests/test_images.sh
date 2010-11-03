@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function test_run () {
 for type in random zeroes

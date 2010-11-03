@@ -1,5 +1,5 @@
 == Dependencies ==
-a posix shell
+bash
 rsync
 tcpdump
 gnuplot

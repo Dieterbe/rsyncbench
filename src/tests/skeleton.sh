@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # override these in plugins
 function test_init () {
         true
